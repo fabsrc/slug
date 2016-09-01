@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🐜</title>
+<style>
+  body {
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  #form {
+    display: block;
+    width: 320px;
+    margin: auto;
+    position: relative;
+  }
+  #link {
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 1px solid #333;
+    padding: 10px 40px 10px 10px;
+    font-size: 1.2em;
+    width: 100%;
+    text-align: center;
+  }
+  #button {
+    position: absolute;
+    background: none;
+    border: 0;
+    font-size: 1.5em;
+    top: 8px;
+    right: 0px;
+    cursor: pointer;
+  }
+  #result {
+    box-sizing: border-box;
+    display: none;
+    border: 1px solid #333;
+    padding: 10px;
+    font-size: 1.2em;
+    margin-top: -1px;
+    width: 100%;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <h1 id="🚀">🐜</h1>
+  <form id="form">
+    <input id="link" type="url" placeholder="Link to shorten">
+    <button type="submit" id="button">&#10145;</button>
+    <input id="result" readonly>
+  </form>
+
+<script>
+var link = document.getElementById('link')
+var result = document.getElementById('result')
+var form = document.getElementById('form')
+var button = document.getElementById('button')
+
+form.addEventListener('submit', function (event) {
+  event.preventDefault()
+
+  var request = new window.XMLHttpRequest()
+  request.open('POST', '/', true)
+
+  request.onload = function () {
+    if (request.status === 200) {
+      result.value = window.location.href + request.responseText
+      result.style.display = 'block'
+      button.style.display = 'none'
+      form.removeEventListener('submit', false, false)
+    }
+  }
+
+  request.send(link.value)
+})
+</script>
+</body>
+</html>
