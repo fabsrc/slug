@@ -3,6 +3,7 @@ const db = require('dirty')('link.db')
 const emojis = require('emojis-list')
 const validUrl = require('valid-url')
 const bodyParser = require('body-parser')
+const punycode = require('punycode')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -24,7 +25,7 @@ app.post('/', (req, res) => {
   console.log(req.body.link, '>', emojiLink)
 
   db.set(emojiLink, req.body.link)
-  res.send(emojiLink)
+  res.send(`${req.protocol}://${punycode.toUnicode(req.headers.host)}/${emojiLink}`)
 })
 
 app.get('/:l', (req, res) => {

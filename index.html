@@ -78,7 +78,7 @@ window.jQuery(function ($) {
   $('.📰').submit(function (event) {
     if ($link.val()) {
       $.post('/', { link: $link.val() }, function (data, textStatus, xhr) {
-        $link.val(window.location.href + data).attr('readonly', 'readonly')
+        $link.val(data).attr('readonly', 'readonly')
         $link.addClass('🐌🔗').select()
         $('.↳').hide()
       })
