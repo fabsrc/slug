@@ -35,5 +35,6 @@ app.get('/:l', (req, res) => {
 })
 
 app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`))
+app.get('*', (req, res) => res.redirect('/'))
 
 app.listen(process.env.PORT || 1234, console.log('🐌'))
