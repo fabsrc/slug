@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.post('/', (req, res) => {
-  if (!validUrl.isUri(req.body.link)) return res.status(400).send('400')
+  if (!validUrl.isUri(req.body.link)) return res.status(400).send('Invalid URL.')
 
   let emojiLink = ''
   do {
@@ -29,12 +29,12 @@ app.get('/:l', (req, res) => {
 
   console.log(req.params.l, '>', link)
 
-  if (!link) return res.redirect('/')
+  if (!link) return res.redirect('/', 404)
 
   res.redirect(link)
 })
 
 app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`))
-app.get('*', (req, res) => res.redirect('/'))
+app.get('*', (req, res) => res.redirect('/', 404))
 
 app.listen(process.env.PORT || 1234, console.log('🐌'))
