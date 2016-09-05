@@ -21,7 +21,7 @@ app.post('/', (req, res) => {
   console.log(req.body.link, '>', emojiLink)
 
   db.set(emojiLink, req.body.link)
-  res.send(`${req.protocol}://${punycode.toUnicode(req.headers.host)}/${emojiLink}`)
+  res.status(201).send(`${req.protocol}://${punycode.toUnicode(req.headers.host)}/${emojiLink}`)
 })
 
 app.get('/:l', (req, res) => {
