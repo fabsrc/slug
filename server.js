@@ -1,5 +1,5 @@
 const app = require('express')()
-const db = require('dirty')('link.db')
+const db = require('dirty')(process.env.DB || 'link.db')
 const emojis = require('emojis-list')
 const validUrl = require('valid-url')
 const bodyParser = require('body-parser')
